@@ -1,0 +1,98 @@
+﻿@page "/createResource"
+@inject IResourceRepository Service
+@inject IPartnerRepository partnersService
+@inject IResourceLevelRepository levService
+@inject NavigationManager navManger
+<div>
+    <h3>Create Resource</h3>
+
+    <EditForm Model="@resource" OnSubmit="@HandleValidSubmit">
+        @*<DataAnnotationsValidator />
+        <ValidationSummary />*@
+        <label>FirstName</label>
+        <InputText id="firstName" @bind-Value="resource.FirstName" />
+        <br />
+        <label>LastName</label>
+        <InputText id="lastName" @bind-Value="resource.LastName" />
+        <br />
+        <label>Partner</label>
+
+        <select name="partnerId">
+            <option value=""></option>
+            @if (Partners != null)
+            {
+                foreach (var item in Partners)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+        <br />
+        <label>Title</label>
+        <InputText id="title" @bind-Value="resource.Title" />
+        <br />
+        <label>About</label>
+        <InputText id="about" @bind-Value="resource.About" />
+
+        <label>Technologies</label>
+        <InputText id="technology" @bind-Value="resource.Technologies" />
+        
+
+    <label>Level Declared</label>
+
+        <select name="level">
+            <option value=""></option>
+            @*@if (ResourceLevels != null)
+            {
+                foreach (var item in ResourceLevels)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }*@
+        </select>
+
+        <br />
+        <label>English Spoken</label>
+        <input type="checkbox" id="enspoke" @bind-value="resource.EnglishSpoken" />
+        <br />
+
+        <label>English Feedback</label>
+        <InputText id="enfeed" @bind-Value="resource.EnglishFeedback" />
+
+        <label>Available</label>
+        <input type="checkbox" id="available" @bind-value="resource.Available" />
+        <br />
+        <label>Cvtool</label>
+        <InputText id="cv" @bind-Value="resource.CvtoolLinkMaster" />
+        <br />
+        <label>Added</label>
+        <InputDate id="added" @bind-Value="resource.Added" />
+
+        <label>Updated</label>
+        <InputDate id="updated" @bind-Value="resource.Updated" />
+
+        <button type="submit">Add</button>
+    </EditForm>
+
+</div>
+@code {
+    private Resource resource = new Resource();
+    private IEnumerable<DataModel.Partner> Partners;
+    private IEnumerable<DataModel.ResourceLevel> ResourceLevels;
+
+
+    private void HandleValidSubmit()
+    {
+        Service.AddResource(resource);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Partners = await partnersService.GetPartners();
+        //ResourceLevels = await levService.GetLevels();
+    }
+
+    // public List<int> p = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public Partner partner = new Partner();
+
+}

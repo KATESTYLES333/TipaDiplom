@@ -1,0 +1,40 @@
+﻿@page "/Contactdetails/{id}"
+@inject IContactRepository Service
+@inject NavigationManager navManger
+<h3>ContactDetails</h3>
+
+<div class="row justify content center m.3">
+    <div class="col-sm-8">
+        <div class="card">
+            @if (Contact != null)
+            {
+<div class="card-header">
+    <h1>@Contact.FirstName</h1>
+</div>
+                <div class="card-body text-center">
+                    <h4>Contact ID : @Contact.Id</h4>
+                </div>
+                                <div class="card-footer text-center">
+                                    <a class="btn btn-primary" href="/">Back</a>
+                                    <a class="btn btn-primary" href="updateContact/@Contact.Id">Edit</a>
+                                    <button class="btn btn-danger" @onclick="DeleteContact">Delete</button>
+                                </div>}
+        </div>
+    </div>
+</div>
+
+@code { [Parameter]
+            public string Id { get; set; }
+
+            public Contact Contact { get; set; } = new Contact();
+
+            protected override async Task OnInitializedAsync()
+            {
+                Contact = await Service.GetContact(Guid.Parse(Id));
+            }
+
+            protected async void DeleteContact()
+            {
+                await Service.DeleteContact(Guid.Parse(Id));
+                navManger.NavigateTo("/");
+            } }

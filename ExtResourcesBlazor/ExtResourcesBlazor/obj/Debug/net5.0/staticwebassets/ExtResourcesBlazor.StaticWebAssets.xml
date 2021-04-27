@@ -1,0 +1,18 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Calendars" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.calendars\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Core" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.core\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Data" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.data\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.DropDowns" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.dropdowns\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.InPlaceEditor" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.inplaceeditor\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Inputs" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.inputs\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Lists" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.lists\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Navigations" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.navigations\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Notifications" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.notifications\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.PdfViewer" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.pdfviewer\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Popups" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.popups\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Spinner" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.spinner\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.SplitButtons" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.splitbuttons\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Themes" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.themes\19.1.0.57\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.WordProcessor" Path="C:\Users\HP\.nuget\packages\syncfusion.blazor.wordprocessor\19.1.0.57\build\..\staticwebassets\" />
+</StaticWebAssets>

@@ -1,0 +1,65 @@
+﻿@page "/Resources"
+@inject DataModel.IResourceRepository Service
+
+<div>
+    <h3>Resource List</h3>
+    <div class="form-group">
+        <a class="btn btn-success" href="createResource"><i class="oi oi-plus"></i> Create New</a>
+    </div>
+    <br>
+</div>
+<div>
+    @if (Resources != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">ParnerId</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">About</th>
+                    <th scope="col">Technologies</th>
+                    <th scope="col">LevelDeclared</th>
+                    <th scope="col">EnglishSpoken</th>
+                    <th scope="col">EnglishFeedback</th>
+                    <th scope="col">Available</th>
+                    <th scope="col">CVToolLinkMaster</th>
+                    <th scope="col">Added</th>
+                    <th scope="col">Updated</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Resource in Resources)
+                {
+                <tr>
+                    <th>@Resource.Id</th>
+                    <td>@Resource.FirstName</td>
+                    <td>@Resource.LastName</td>
+                    <td>@Resource.PartnerId</td>
+                    <td>@Resource.Title</td>
+                    <td>@Resource.About</td>
+                    <td>@Resource.Technologies</td>
+                    <td>@Resource.LevelDeclared</td>
+                    <td>@Resource.EnglishSpoken</td>
+                    <td>@Resource.EnglishFeedback</td>
+                    <td>@Resource.Available</td>
+                    <td>@Resource.CvtoolLinkMaster</td>
+                    <td>@Resource.Added</td>
+                    <td>@Resource.Updated</td>
+                </tr>
+                }
+            </tbody>
+        </table>}
+</div>
+
+@code { private IEnumerable<DataModel.Resource> Resources;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Resources = await Service.GetResources();
+    }
+}

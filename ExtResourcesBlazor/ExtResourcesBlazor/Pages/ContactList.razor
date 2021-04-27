@@ -1,0 +1,42 @@
+@page "/Contacts"
+@inject DataModel.IContactRepository Service
+<div>
+    <h3>Contact List</h3>
+    <div class="form-group">
+        <a class="btn btn-success" href="createContact"><i class="oi oi-plus"></i> Create New</a>
+    </div>
+    <br>
+</div>
+<div>
+    @if (Contacts != null)
+    {
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">DOB</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Contact in Contacts)
+        {
+<tr>
+    <th>@Contact.Id</th>
+    <td><a href=@($"Contactdetails/{Contact.Id}")>@Contact.FirstName</a></td>
+    <td>@Contact.LastName</td>
+    <td>@(Contact.DateOfBirth.HasValue ? Contact.DateOfBirth.Value.ToString("MM/dd/yyyy") : "") </td>
+</tr>}
+    </tbody>
+</table>}
+</div>
+
+@code { private IEnumerable<DataModel.Contact> Contacts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Contacts = await Service.GetContacts();
+    }
+
+    }
