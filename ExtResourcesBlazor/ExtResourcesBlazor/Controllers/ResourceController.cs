@@ -1,9 +1,14 @@
 ﻿using DataModel;
+using DataModel.Models;
+using EndToEnd.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,6 +17,9 @@ namespace ExtResourcesBlazor
 	public class ResourceController : Controller
 	{
 		private readonly PartnersContext _context;
+		ApplicationDbContext appcontext;
+
+		IWebHostEnvironment _appEnvironment;
 
 		public ResourceController(PartnersContext context)
 		{
@@ -25,24 +33,24 @@ namespace ExtResourcesBlazor
 			return View(await resourcesContext.ToListAsync());
 		}
 
-		// GET: Resources/Details/5
+		// GET: Resources/CVs/5
 		public async Task<IActionResult> Details(Guid? id)
 		{
-			if (id == null)
-			{
-				return NotFound();
-			}
+			//if (id == null)
+			//{
+			//	return NotFound();
+			//}
 
-			var resource = await _context.Resource
-				.Include(c => c.Partner)
-				.Include(c => c.LevelDeclaredNavigation)
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (resource == null)
-			{
-				return NotFound();
-			}
+			//var resource = await _context.Resource
+			//	.Include(c => c.Partner)
+			//	.Include(c => c.LevelDeclaredNavigation)
+			//	.FirstOrDefaultAsync(m => m.Id == id);
+			//if (resource == null)
+			//{
+			//	return NotFound();
+			//}
 
-			return View(resource);
+			return View(id);
 		}
 
 		// GET: Resources/Create
@@ -60,12 +68,18 @@ namespace ExtResourcesBlazor
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PartnerId,Title,About,Technologies,LevelDeclared,EnglishSpoken,EnglishFeedback,Available,CVToolLinkMaster,Added,Updated")] Resource resource)
 		{
+
 			if (ModelState.IsValid)
 			{
 				resource.Id = Guid.NewGuid();
+				
+				
+				
+
 				_context.Add(resource);
 				await _context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
+
 			}
 			ViewData["PartnerId"] = new SelectList(_context.Partner, "Id", "Name", resource.PartnerId);
 			ViewData["LevelDeclared"] = new SelectList(_context.WayOfCommunication, "Id", "Name", resource.LevelDeclared);
@@ -156,6 +170,11 @@ namespace ExtResourcesBlazor
 			_context.Resource.Remove(res);
 			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
+		}
+
+		private void AddFile()
+		{
+
 		}
 
 		private bool ResourceExists(Guid id)

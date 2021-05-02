@@ -112,17 +112,21 @@ using DataModel;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 59 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\ResourceList.razor"
+#line 66 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\ResourceList.razor"
         private IEnumerable<DataModel.Resource> Resources;
+    private IEnumerable<DataModel.Partner> Partners;
 
     protected override async Task OnInitializedAsync()
     {
         Resources = await Service.GetResources();
+        //Partners = await service.GetPartners();
+
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private DataModel.IPartnerRepository service { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private DataModel.IResourceRepository Service { get; set; }
     }
 }

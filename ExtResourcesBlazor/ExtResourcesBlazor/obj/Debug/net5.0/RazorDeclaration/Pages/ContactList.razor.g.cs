@@ -112,15 +112,13 @@ using DataModel;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 35 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\ContactList.razor"
+#line 36 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\ContactList.razor"
         private IEnumerable<DataModel.Contact> Contacts;
 
     protected override async Task OnInitializedAsync()
     {
         Contacts = await Service.GetContacts();
-    }
-
-    
+    } 
 
 #line default
 #line hidden

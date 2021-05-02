@@ -1,14 +1,66 @@
-﻿@page "/CVs"
+﻿@page "/CVs/{id}"
 @using Syncfusion.Blazor.PdfViewerServer
 @using Syncfusion.Blazor.DocumentEditor
 @using Syncfusion.Blazor.Buttons
-
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment _appEnvironment
 @using System.IO
-@inject DataModel.IContactRepository Service
+@using Newtonsoft.Json
+@inject DataModel.IResourceRepository Service
 
-<SfPdfViewerServer  Height="900px" Width="1060px"></SfPdfViewerServer>
-<SfDocumentEditorContainer Height="650px" Width="1230px"></SfDocumentEditorContainer>
+
+@if (IsPdf)
+{
+    <SfPdfViewerServer DocumentPath="@Path" Height="700px" Width="1060px"></SfPdfViewerServer>
+}
+else
+{
+    <SfDocumentEditorContainer @ref="container" Height="650px" Width="1230px"></SfDocumentEditorContainer>
+}
 
 @code {
 
- }
+    [Parameter]
+    public string Id { get; set; }
+    // [Parameter]
+    // public string FileType { get; set; }
+    public string Path { get; set; }
+    public bool IsPdf { get; set; }
+    SfDocumentEditorContainer container;
+    public Resource Resource { get; set; } = new Resource();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Resource = await Service.GetResource(Guid.Parse(Id));
+
+        if (Resource != null)
+        {
+            Path = @$"D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\wwwroot\Files\{Resource.CvtoolLinkMaster}";
+
+            var file = Resource.CvtoolLinkMaster.Split('.')[1];
+
+            if (file == "pdf")
+            {
+                IsPdf = true;
+            }
+            else
+            {
+                IsPdf = false;
+                //container.DocumentEditor.Open(Path);
+
+                using (FileStream fileStream = new FileStream(Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                {
+                    WordDocument document = WordDocument.Load(fileStream, ImportFormatType.Docx);
+                    string json = JsonConvert.SerializeObject(document);
+                    document.Dispose();
+                    //To observe the memory go down, null out the reference of document variable.
+                    document = null;
+                    SfDocumentEditor editor = container.DocumentEditor;
+                    editor.Open(json);
+                    //To observe the memory go down, null out the reference of json variable.
+                    json = null;
+                }
+            }
+        }
+
+    }
+}

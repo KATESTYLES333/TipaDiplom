@@ -132,7 +132,18 @@ using System.IO;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 12 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CVForm.razor"
+        
+    public string Path { get; set; } = @"D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\wwwroot\Files\титульник.pdf";
+    //_appEnvironment.WebRootPath +
+   
+
+#line default
+#line hidden
+#nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private DataModel.IContactRepository Service { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Microsoft.AspNetCore.Hosting.IWebHostEnvironment _appEnvironment { get; set; }
     }
 }
 #pragma warning restore 1591

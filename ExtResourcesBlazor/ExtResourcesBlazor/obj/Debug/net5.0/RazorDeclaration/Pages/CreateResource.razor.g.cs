@@ -103,6 +103,13 @@ using DataModel;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 7 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CreateResource.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/createResource")]
     public partial class CreateResource : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -112,16 +119,26 @@ using DataModel;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 78 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CreateResource.razor"
+#line 86 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CreateResource.razor"
        
     private Resource resource = new Resource();
     private IEnumerable<DataModel.Partner> Partners;
     private IEnumerable<DataModel.ResourceLevel> ResourceLevels;
+    private List<IBrowserFile> Files = new List<IBrowserFile>();
+    private long maxFileSize = 1024 * 1500;
 
-
-    private void HandleValidSubmit()
+    private async void HandleValidSubmit()
     {
-        Service.AddResource(resource);
+        //var file = Files.First();
+        // путь к папке files
+        string path = "/Files/" + Files.First().Name;
+        // сохраняем файл в папку Files в каталоге wwwroot
+        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+        {
+            await Files.First().OpenReadStream(maxFileSize).CopyToAsync(fileStream);
+        }
+
+        await Service.AddResource(resource, Files.First().Name);
     }
 
     protected override async Task OnInitializedAsync()
@@ -130,13 +147,28 @@ using DataModel;
         //ResourceLevels = await levService.GetLevels();
     }
 
-    // public List<int> p = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public Partner partner = new Partner();
 
+    private Dictionary<IBrowserFile, string> loadedFiles =
+        new Dictionary<IBrowserFile, string>();
+
+    async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        //тут был иф
+        Files.Clear();
+        Files.Add(e.File);
+
+        //FileModel file = new FileModel { Name = uploadedFile.FileName, Path = path };
+        //resource.CvtoolLinkMaster = path + "1";
+        //appcontext.Files.Add(file);
+        //appcontext.SaveChanges();
+
+    }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Microsoft.AspNetCore.Hosting.IWebHostEnvironment _appEnvironment { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navManger { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IResourceLevelRepository levService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IPartnerRepository partnersService { get; set; }

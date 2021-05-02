@@ -3,20 +3,23 @@
 @inject IPartnerRepository partnersService
 @inject IResourceLevelRepository levService
 @inject NavigationManager navManger
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment _appEnvironment
+@using System.IO
+
+
 <div>
     <h3>Create Resource</h3>
 
     <EditForm Model="@resource" OnSubmit="@HandleValidSubmit">
-        @*<DataAnnotationsValidator />
-        <ValidationSummary />*@
+
         <label>FirstName</label>
         <InputText id="firstName" @bind-Value="resource.FirstName" />
         <br />
         <label>LastName</label>
         <InputText id="lastName" @bind-Value="resource.LastName" />
         <br />
-        <label>Partner</label>
 
+        <label>Partner</label>
         <select name="partnerId">
             <option value=""></option>
             @if (Partners != null)
@@ -36,19 +39,18 @@
 
         <label>Technologies</label>
         <InputText id="technology" @bind-Value="resource.Technologies" />
-        
 
-    <label>Level Declared</label>
 
+        <label>Level Declared</label>
         <select name="level">
             <option value=""></option>
             @*@if (ResourceLevels != null)
-            {
-                foreach (var item in ResourceLevels)
                 {
-                    <option value="@item.Id">@item.Name</option>
-                }
-            }*@
+                    foreach (var item in ResourceLevels)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                }*@
         </select>
 
         <br />
@@ -62,28 +64,44 @@
         <label>Available</label>
         <input type="checkbox" id="available" @bind-value="resource.Available" />
         <br />
-        <label>Cvtool</label>
-        <InputText id="cv" @bind-Value="resource.CvtoolLinkMaster" />
         <br />
+
+        <label>Cvtool</label>
+
+        @*<input id="CvtoolLinkMaster" type="file" @bind-value="resource.CvtoolLinkMaster" name="uploadedFile" /><br>*@
+        <InputFile OnChange="@LoadFiles" />
+        <br />
+
         <label>Added</label>
         <InputDate id="added" @bind-Value="resource.Added" />
 
         <label>Updated</label>
         <InputDate id="updated" @bind-Value="resource.Updated" />
-
+        <br />
         <button type="submit">Add</button>
     </EditForm>
 
 </div>
+
 @code {
     private Resource resource = new Resource();
     private IEnumerable<DataModel.Partner> Partners;
     private IEnumerable<DataModel.ResourceLevel> ResourceLevels;
+    private List<IBrowserFile> Files = new List<IBrowserFile>();
+    private long maxFileSize = 1024 * 1500;
 
-
-    private void HandleValidSubmit()
+    private async void HandleValidSubmit()
     {
-        Service.AddResource(resource);
+        //var file = Files.First();
+        // путь к папке files
+        string path = "/Files/" + Files.First().Name;
+        // сохраняем файл в папку Files в каталоге wwwroot
+        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+        {
+            await Files.First().OpenReadStream(maxFileSize).CopyToAsync(fileStream);
+        }
+
+        await Service.AddResource(resource, Files.First().Name);
     }
 
     protected override async Task OnInitializedAsync()
@@ -92,7 +110,21 @@
         //ResourceLevels = await levService.GetLevels();
     }
 
-    // public List<int> p = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public Partner partner = new Partner();
 
+    private Dictionary<IBrowserFile, string> loadedFiles =
+        new Dictionary<IBrowserFile, string>();
+
+    async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        //тут был иф
+        Files.Clear();
+        Files.Add(e.File);
+
+        //FileModel file = new FileModel { Name = uploadedFile.FileName, Path = path };
+        //resource.CvtoolLinkMaster = path + "1";
+        //appcontext.Files.Add(file);
+        //appcontext.SaveChanges();
+
+    }
 }

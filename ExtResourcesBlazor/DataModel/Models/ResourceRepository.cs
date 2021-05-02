@@ -16,12 +16,12 @@ namespace DataModel
 			_appDbContext = appDbContext;
 		}
 
-		public async Task<Resource> AddResource(Resource Resource)
+		public async Task<Resource> AddResource(Resource Resource, string FileName)
 		{
 			//generate unique id
 			Guid guid = Guid.NewGuid();
 			Resource.Id = guid;
-
+			Resource.CvtoolLinkMaster = FileName;
 			var result = await _appDbContext.Resource.AddAsync(Resource);
 
 			await _appDbContext.SaveChangesAsync();

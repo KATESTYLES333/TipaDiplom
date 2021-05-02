@@ -11,7 +11,7 @@ namespace DataModel
 	{
 		Task<IEnumerable<Resource>> GetResources();
 		Task<Resource> GetResource(Guid ResourceId);
-		Task<Resource> AddResource(Resource Resource);
+		Task<Resource> AddResource(Resource Resource, string FileName);
 		Task<Resource> UpdateResource(Resource Resource);
 		Task<Resource> DeleteResource(Guid ResourceId);
 	}

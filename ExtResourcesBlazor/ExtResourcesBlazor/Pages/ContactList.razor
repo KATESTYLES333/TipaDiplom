@@ -27,7 +27,8 @@
     <td><a href=@($"Contactdetails/{Contact.Id}")>@Contact.FirstName</a></td>
     <td>@Contact.LastName</td>
     <td>@(Contact.DateOfBirth.HasValue ? Contact.DateOfBirth.Value.ToString("MM/dd/yyyy") : "") </td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>}
 </div>
@@ -37,6 +38,4 @@
     protected override async Task OnInitializedAsync()
     {
         Contacts = await Service.GetContacts();
-    }
-
-    }
+    } }
