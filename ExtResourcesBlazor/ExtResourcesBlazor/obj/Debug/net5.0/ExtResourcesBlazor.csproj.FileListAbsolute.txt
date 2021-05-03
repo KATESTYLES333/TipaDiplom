@@ -387,3 +387,4 @@ D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\bin\Debug\net5.0\Syncfusion.Blaz
 D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\bin\Debug\net5.0\Syncfusion.DocIO.Portable.dll
 D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\bin\Debug\net5.0\Syncfusion.OfficeChart.Portable.dll
 D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\bin\Debug\net5.0\Syncfusion.WordProcessor.AspNet.Core.dll
+D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\bin\Debug\net5.0\GrapeCity.Documents.DX.Windows.dll

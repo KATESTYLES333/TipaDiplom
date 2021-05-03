@@ -49,7 +49,8 @@ namespace DataModel
 
 		public async Task<IEnumerable<Resource>> GetResources()
 		{
-			return await _appDbContext.Resource.Include(e => e.Partner).ToListAsync();
+			
+			return await _appDbContext.Resource.Include(a => a.LevelDeclaredNavigation).Include(e => e.Partner).ToListAsync();
 		}
 
 		public async Task<Resource> UpdateResource(Resource Resource)

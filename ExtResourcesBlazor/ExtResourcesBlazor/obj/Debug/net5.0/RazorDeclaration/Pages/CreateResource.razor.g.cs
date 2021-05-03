@@ -119,7 +119,7 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 86 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CreateResource.razor"
+#line 84 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CreateResource.razor"
        
     private Resource resource = new Resource();
     private IEnumerable<DataModel.Partner> Partners;
@@ -144,7 +144,7 @@ using System.IO;
     protected override async Task OnInitializedAsync()
     {
         Partners = await partnersService.GetPartners();
-        //ResourceLevels = await levService.GetLevels();
+        ResourceLevels = await levService.GetLevels();
     }
 
     public Partner partner = new Partner();

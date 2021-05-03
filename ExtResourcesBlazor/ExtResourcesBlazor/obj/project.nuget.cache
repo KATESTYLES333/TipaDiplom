@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "AkSXVxto+pDh5z4DehRrb66UoJ+9uuX3k+bUYYeIkQOvDSJ+H8uxfyA9MJOrvi1YD5vnXwPUINNPTGobn++0Rg==",
+  "dgSpecHash": "KQR+pCBSPBzPNkpPj057tazSntDvxgXJiN4eURWsGuKzoVLZEo1hANH6g1uGd+yHRmtPmG02XgD7htcSfp4Lfw==",
   "success": true,
   "projectFilePath": "D:\\DIPLOM\\ExtResourcesBlazor\\ExtResourcesBlazor\\ExtResourcesBlazor.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\HP\\.nuget\\packages\\grapecity.documents.dx.windows\\4.1.0.658\\grapecity.documents.dx.windows.4.1.0.658.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.authentication.azuread.ui\\3.1.7\\microsoft.aspnetcore.authentication.azuread.ui.3.1.7.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.7\\microsoft.aspnetcore.authentication.jwtbearer.3.1.7.nupkg.sha512",

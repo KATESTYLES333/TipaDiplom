@@ -112,7 +112,7 @@ using DataModel;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 61 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\ResourceList.razor"
+#line 66 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\ResourceList.razor"
         private IEnumerable<DataModel.Resource> Resources;
     private IEnumerable<DataModel.Partner> Partners;
 

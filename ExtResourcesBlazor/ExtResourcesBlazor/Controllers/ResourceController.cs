@@ -72,10 +72,6 @@ namespace ExtResourcesBlazor
 			if (ModelState.IsValid)
 			{
 				resource.Id = Guid.NewGuid();
-				
-				
-				
-
 				_context.Add(resource);
 				await _context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));

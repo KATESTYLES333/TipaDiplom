@@ -118,6 +118,7 @@ using DataModel;
 
     protected override async Task OnInitializedAsync()
     {
+       
         Resources = await Service.GetResources();
         //Partners = await service.GetPartners();
 

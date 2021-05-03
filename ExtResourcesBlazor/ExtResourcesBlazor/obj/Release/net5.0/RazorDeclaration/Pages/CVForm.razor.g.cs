@@ -124,7 +124,14 @@ using System.IO;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/CVs")]
+#nullable restore
+#line 7 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CVForm.razor"
+using Newtonsoft.Json;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/CVs/{id}")]
     public partial class CVForm : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -133,16 +140,63 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 12 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CVForm.razor"
-        
-    public string Path { get; set; } = @"D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\wwwroot\Files\титульник.pdf";
-    //_appEnvironment.WebRootPath +
-   
+#line 22 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CVForm.razor"
+       
+
+    [Parameter]
+    public string Id { get; set; }
+    // [Parameter]
+    // public string FileType { get; set; }
+    public string Path { get; set; }
+    public bool IsPdf { get; set; }
+    SfDocumentEditorContainer container;
+    public Resource Resource { get; set; } = new Resource();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Resource = await Service.GetResource(Guid.Parse(Id));
+
+        if (Resource != null)
+        {
+            Path = @$"D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\wwwroot\Files\{Resource.CvtoolLinkMaster}";
+
+            var file = Resource.CvtoolLinkMaster.Split('.')[1];
+
+            if (file == "pdf")
+            {
+                IsPdf = true;
+            }
+            else
+            {
+                IsPdf = false;
+                //container.DocumentEditor.Open(Path);
+                using (System.IO.FileStream fileStream = new System.IO.FileStream(Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                {
+                    WordDocument document = WordDocument.Load(fileStream, ImportFormatType.Docx);
+                    container.GetDocumentEditor().Open(JsonConvert.SerializeObject(document));
+                    document.Dispose();
+                }
+                //using (FileStream fileStream = new FileStream(Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                //{
+                //    WordDocument document = WordDocument.Load(fileStream, ImportFormatType.Docx);
+                //    string json = JsonConvert.SerializeObject(document);
+                //    document.Dispose();
+                //    //To observe the memory go down, null out the reference of document variable.
+                //    document = null;
+                //    SfDocumentEditor editor = container.DocumentEditor;
+                //    editor.Open(json);
+                //    //To observe the memory go down, null out the reference of json variable.
+                //    json = null;
+                //}
+            }
+        }
+
+    }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private DataModel.IContactRepository Service { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private DataModel.IResourceRepository Service { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Microsoft.AspNetCore.Hosting.IWebHostEnvironment _appEnvironment { get; set; }
     }
 }

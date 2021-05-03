@@ -35,12 +35,16 @@ namespace DataModel
 
 		public async Task<ResourceLevel> GetLevel(Guid RLevelId)
 		{
-			throw new NotImplementedException();
+			throw new NotImplementedException("PIZDEC");
+			//var result = await _appDbContext.ResourceLevel
+			//.FirstOrDefaultAsync(e => e.Id == RLevelId);
+			//.Include(e => e.LevelDeclaredNavigation)
+			//return result;
 		}
 
 		public async  Task<IEnumerable<ResourceLevel>> GetLevels()
 		{
-			return await _appDbContext.ResourceLevel.Include(e => e.Name).ToListAsync();
+			return await _appDbContext.ResourceLevel.ToListAsync();
 		}
 
 		public async Task<ResourceLevel> UpdateLevel(ResourceLevel RLevel)

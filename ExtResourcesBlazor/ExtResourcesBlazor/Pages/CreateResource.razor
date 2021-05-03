@@ -20,8 +20,8 @@
         <br />
 
         <label>Partner</label>
-        <select name="partnerId">
-            <option value=""></option>
+        <select name="partnerId" @bind="resource.PartnerId">
+            <option id="partnerId" value=""></option>
             @if (Partners != null)
             {
                 foreach (var item in Partners)
@@ -42,15 +42,15 @@
 
 
         <label>Level Declared</label>
-        <select name="level">
-            <option value=""></option>
-            @*@if (ResourceLevels != null)
+        <select name="level" @bind="resource.LevelDeclared">
+            <option value="level"></option>
+            @if (ResourceLevels != null)
+            {
+                foreach (var item in ResourceLevels)
                 {
-                    foreach (var item in ResourceLevels)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                }*@
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
         </select>
 
         <br />
@@ -67,8 +67,6 @@
         <br />
 
         <label>Cvtool</label>
-
-        @*<input id="CvtoolLinkMaster" type="file" @bind-value="resource.CvtoolLinkMaster" name="uploadedFile" /><br>*@
         <InputFile OnChange="@LoadFiles" />
         <br />
 
@@ -107,7 +105,7 @@
     protected override async Task OnInitializedAsync()
     {
         Partners = await partnersService.GetPartners();
-        //ResourceLevels = await levService.GetLevels();
+        ResourceLevels = await levService.GetLevels();
     }
 
     public Partner partner = new Partner();

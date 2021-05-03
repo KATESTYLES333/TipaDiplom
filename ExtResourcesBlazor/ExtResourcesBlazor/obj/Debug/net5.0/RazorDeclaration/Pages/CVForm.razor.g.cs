@@ -140,8 +140,8 @@ using Newtonsoft.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 20 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CVForm.razor"
-       
+#line 23 "D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\Pages\CVForm.razor"
+ 
 
     [Parameter]
     public string Id { get; set; }
@@ -169,21 +169,21 @@ using Newtonsoft.Json;
             else
             {
                 IsPdf = false;
-                //container.DocumentEditor.Open(Path);
-
-                using (FileStream fileStream = new FileStream(Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
-                {
-                    WordDocument document = WordDocument.Load(fileStream, ImportFormatType.Docx);
-                    string json = JsonConvert.SerializeObject(document);
-                    document.Dispose();
-                    //To observe the memory go down, null out the reference of document variable.
-                    document = null;
-                    SfDocumentEditor editor = container.DocumentEditor;
-                    editor.Open(json);
-                    //To observe the memory go down, null out the reference of json variable.
-                    json = null;
-                }
             }
+        }
+    }
+
+
+    private void OnCreated()
+    {
+        Path = @$"D:\DIPLOM\ExtResourcesBlazor\ExtResourcesBlazor\wwwroot\Files\{Resource.CvtoolLinkMaster}";
+
+
+        using (System.IO.FileStream fileStream = new System.IO.FileStream(Path, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+        {
+            WordDocument document = WordDocument.Load(fileStream, ImportFormatType.Docx);
+            container.GetDocumentEditor().Open(JsonConvert.SerializeObject(document));
+            document.Dispose();
         }
 
     }

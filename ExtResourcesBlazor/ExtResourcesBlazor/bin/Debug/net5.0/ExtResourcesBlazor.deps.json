@@ -34,6 +34,7 @@
       "ExtResourcesBlazor/1.0.0": {
         "dependencies": {
           "DataModel": "1.0.0",
+          "GrapeCity.Documents.DX.Windows": "4.1.0.658",
           "Microsoft.AspNetCore.Authentication.AzureAD.UI": "3.1.7",
           "Microsoft.AspNetCore.Blazor.HttpClient": "3.2.0-preview3.20168.3",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.4",
@@ -326,6 +327,17 @@
         },
         "compile": {
           "ExtResourcesBlazor.dll": {}
+        }
+      },
+      "GrapeCity.Documents.DX.Windows/4.1.0.658": {
+        "runtime": {
+          "lib/netstandard2.0/GrapeCity.Documents.DX.Windows.dll": {
+            "assemblyVersion": "4.1.0.658",
+            "fileVersion": "4.1.0.658"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/GrapeCity.Documents.DX.Windows.dll": {}
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -4068,6 +4080,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "GrapeCity.Documents.DX.Windows/4.1.0.658": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0Auq0kNX59f+M3R2EpKlGHSYKyNi/6/QcEaMfctecLujyWGg2cMh1aOM13jLq1H4lHCduPElRkDWmZojkjIAug==",
+      "path": "grapecity.documents.dx.windows/4.1.0.658",
+      "hashPath": "grapecity.documents.dx.windows.4.1.0.658.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

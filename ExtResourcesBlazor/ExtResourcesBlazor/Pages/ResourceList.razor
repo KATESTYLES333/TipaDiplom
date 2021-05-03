@@ -41,11 +41,11 @@
                         <th>@Resource.Id</th>
                         <td>@Resource.FirstName</td>
                         <td>@Resource.LastName</td>
-                        <td>@Resource.PartnerId</td>
+                        <td>@Resource.Partner.Name</td>
                         <td>@Resource.Title</td>
                         <td>@Resource.About</td>
                         <td>@Resource.Technologies</td>
-                        <td>@Resource.LevelDeclared</td>
+                        <td>@Resource.LevelDeclaredNavigation.Name</td>
                         <td>@Resource.EnglishSpoken</td>
                         <td>@Resource.EnglishFeedback</td>
                         <td>@Resource.Available</td>
@@ -68,6 +68,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+       
         Resources = await Service.GetResources();
         //Partners = await service.GetPartners();
 
